@@ -1,0 +1,28 @@
+{
+  "name": "comfort-check",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">=14.0"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test:handler": "sls invoke local -f comfort-check-post --path ./test.json",
+    "deploy:api": "sls deploy --stage prod",
+    "deploy:app": "npm run build && aws s3 cp ./dist s3://comfort-checks/ --recursive"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1016.0"
+  },
+  "devDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "@vitejs/plugin-react": "^1.0.0",
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17",
+    "vite": "^2.6.4"
+  }
+}

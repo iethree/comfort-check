@@ -1,0 +1,32 @@
+service: comfort-check
+variablesResolutionMode: 20210326
+useDotenv: true
+provider:
+  name: aws
+  stage: ${opt:stage, 'local'}
+  environment:
+    ENV: ${opt:stage, 'local'}
+  runtime: nodejs14.x
+  versionFunctions: false
+  region: us-east-2
+  iam:
+    role:
+      name: comfort-check-role
+      statements:
+        - Effect: Allow
+          Resource:
+            - 'arn:aws:s3:::comfort-checks/*'
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+functions:
+  comfort-check-post:
+    handler: handler.post
+    timeout: 10
+    memorySize: 256
+    events:
+      - http:
+          path: /
+          method: post
+          cors:
+            origin: '*'
