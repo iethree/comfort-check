@@ -1,5 +1,7 @@
 # Comfort Check
 
+![preview](preview.png)
+
 This is a little tool we use to facilitate [comfort checks](https://www.funretrospectives.com/safety-check/) for our internal retrospectives. All submissions are completely anonymous amd are deleted after 48 hours.
 
 It is available for public use here: https://comfort-checks.s3.us-east-2.amazonaws.com/index.html
