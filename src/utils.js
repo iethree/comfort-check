@@ -1,4 +1,3 @@
-
 const lambdaAddress = 'https://xx7bb7xoph.execute-api.us-east-2.amazonaws.com/prod/';
 const bucketAddress = 'https://comfort-checks.s3.us-east-2.amazonaws.com';
 
