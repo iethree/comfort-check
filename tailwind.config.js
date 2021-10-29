@@ -5,7 +5,11 @@ module.exports = {
   purge: ["./index.html", "./src/**/*.jsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'spin-slow': 'spin 1.5s linear infinite',
+      }
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -27,7 +31,7 @@ module.exports = {
       five: {
         DEFAULT: 'hsl(152, 98%, 50%)'
       }
-    }
+    },
   },
   variants: {
     extend: {},

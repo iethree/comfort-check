@@ -23,16 +23,31 @@ export default function App(){
             <Legend />
           </>
         )}
-        <div className="text-gray-400 mt-20 text-center">
-          <a href="https://www.funretrospectives.com/the-retrospective-prime-directive/" className="mx-5" target="_blank">
-            the prime directive
-          </a>
-          <a href="https://www.funretrospectives.com/safety-check/" className="mx-5" target="_blank">
-            how to check comfort
-          </a>
-          {id && <a href={`?id=${uuid()}`} className="mx-5">new comfort check</a>}
-        </div>
+        <Links id={id} />
       </div>
     </div>
   );
 };
+
+
+function Links({ id }) {
+  return (
+    <div className="text-gray-400 mt-20 flex justify-center flex-wrap">
+      <a
+        href="https://www.funretrospectives.com/the-retrospective-prime-directive/"
+        className="mx-5 block"
+        target="_blank"
+      >
+        the prime directive
+      </a>
+      <a
+        href="https://www.funretrospectives.com/safety-check/"
+        className="mx-5 block"
+        target="_blank"
+      >
+        how to check comfort
+      </a>
+      {id && <a href={`?id=${uuid()}`} className="mx-5 block">new comfort check</a>}
+    </div>
+  );
+}

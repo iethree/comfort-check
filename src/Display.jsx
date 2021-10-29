@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
+import { SadFace, LoadingSpinner } from './Icons';
 import { getComfort } from './utils.js';
 
 const levels = {
@@ -11,19 +12,40 @@ const levels = {
 
 export default function Display({ id }) {
   const [levelData, setLevelData] = useState(null);
-  let interval = null;
+  const [error, setError] = useState(false);
+
+  const fetchComfort = () => getComfort(id)
+    .then(setLevelData)
+    .catch(() => setError(true));
+
+  useEffect(fetchComfort, []);
+
   useEffect(() => {
-    getComfort(id).then(setLevelData);
-    setInterval(() => {
-      getComfort(id).then(setLevelData);
-    }, 10 * 1000);
-  }, []);
+    // don't keep refreshing if we failed before
+    if (error) return;
+
+    const timeout = setTimeout(fetchComfort, 10 * 1000);
+    return () => clearTimeout(timeout);
+  }, [levelData]);
 
   return (
-    <div className="text-gray-900 flex flex-wrap justify-center max-w-xl">
-      {!levelData && loadingSpinner}
-      {levelData?.map((l, i) => <Item key={i} value={l} /> )}
-    </div>
+    <>
+      {error && (
+        <div className="text-center text-xl my-10 text-gray-400">
+          <SadFace />
+          Something went wrong
+        </div>
+      )}
+      <div className="text-gray-900 flex flex-wrap justify-center max-w-xl">
+        {!levelData && !error && <LoadingSpinner />}
+        {levelData?.map((l, i) => <Item key={i} value={l} /> )}
+      </div>
+      {levelData && !error && (
+        <div className="flex justify-center items-center mt-5 text-gray-500">
+          <LoadingSpinner size="xs" speed="slow" /> updating
+        </div>
+      )}
+    </>
   );
 }
 
@@ -36,8 +58,3 @@ function Item({ value }) {
     </div>
   );
 }
-
-const loadingSpinner = <svg className="animate-spin -ml-1 mr-3 h-12 w-12 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-</svg>;
