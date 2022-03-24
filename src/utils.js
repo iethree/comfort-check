@@ -1,5 +1,5 @@
-const lambdaAddress = 'https://xx7bb7xoph.execute-api.us-east-2.amazonaws.com/prod/';
-const bucketAddress = 'https://comfort-checks.s3.us-east-2.amazonaws.com';
+const lambdaAddress = 'https://us-central1-infopanel-bots.cloudfunctions.net/comfortCheck';
+const bucketAddress = 'https://storage.googleapis.com/comfort-checks';
 
 export function uuid() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -19,7 +19,7 @@ export function setComfort(level) {
 }
 
 export function getComfort(id){
-  return fetch(`${bucketAddress}/data/${id}.json`)
+  return fetch(`${bucketAddress}/data/${id}.json?time=${Date.now()}`)
     .then(r=>r.json())
     .then(data => data.sort((a, b) => b - a));
 }

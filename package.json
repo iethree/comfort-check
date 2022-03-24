@@ -1,6 +1,6 @@
 {
   "name": "comfort-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "node": ">=14.0"
   },
@@ -9,19 +9,20 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test:handler": "sls invoke local -f comfort-check-post --path ./test.json",
-    "deploy:api": "sls deploy --stage prod",
-    "deploy:app": "npm run build && aws s3 cp ./dist s3://comfort-checks/ --recursive"
+    "test:handler": "functions-framework --source ./index.js --target post --port 8081",
+    "deploy:api": "gcloud functions deploy comfortCheck --runtime nodejs16 --trigger-http --allow-unauthenticated --region us-central1 --entry-point post",
+    "deploy:app": "npm run build && gcloud alpha storage cp -r ./dist/* gs://comfort-checks"
   },
   "dependencies": {
-    "aws-sdk": "^2.1016.0"
+    "@google-cloud/functions-framework": "^3.0.0",
+    "@google-cloud/storage": "^5.18.2"
   },
   "devDependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
     "@vitejs/plugin-react": "^1.0.0",
     "autoprefixer": "^10.3.7",
     "postcss": "^8.3.11",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "tailwindcss": "^2.2.17",
     "vite": "^2.6.4"
   }
