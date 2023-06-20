@@ -7,7 +7,7 @@
 
 This is a little serverless web app we use to facilitate [comfort checks](https://www.funretrospectives.com/safety-check/) for our internal retrospectives. All submissions are completely anonymous and are deleted after 48 hours.
 
-It is available for public use [here](https://storage.googleapis.com/comfort-checks/index.html?id=6ab4b8be-0c0d-4408-9f7b-9529c70d1177).
+It is available for public use [here](https://storage.googleapis.com/comfort-checks/index.html).
 
 ## Architecture
 
