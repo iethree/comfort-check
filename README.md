@@ -16,7 +16,7 @@ The front-end is a simple react app deployed to a stacic cloud hosting bucket. B
 The back-end API is .json files stored in in a static bucket and updated using a simple serverless javascript API function.
 ## Install
 
-You are welcome to use this [public installation]([https://comfort-checks.s3.us-east-2.amazonaws.com/index.html](https://storage.googleapis.com/comfort-checks/index.html)) for your own team, but if you'd like to spin up your own version, you'll need to:
+You are welcome to use this [public installation](https://storage.googleapis.com/comfort-checks/index.html) for your own team, but if you'd like to spin up your own version, you'll need to:
 
 1. Set up an cloud storage bucket with public-read access, CORS enabled, and an auto-deletion policy for `data/` objects
 2. Update the package.json to deploy to your own bucket
